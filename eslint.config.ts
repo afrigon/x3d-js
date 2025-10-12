@@ -8,8 +8,6 @@ import prettier from "eslint-config-prettier/flat"
 export default defineConfig(
     eslint.configs.recommended,
     tseslint.configs.recommendedTypeChecked,
-    react.configs.flat.recommended,
-    react.configs.flat["jsx-runtime"],
     {
         languageOptions: {
             ecmaVersion: 2022,
@@ -17,16 +15,7 @@ export default defineConfig(
                 projectService: true,
                 tsconfigRootDir: import.meta.dirname
             }
-        },
-        settings: {
-            react: {
-                version: "detect"
-            }
-        },
-        plugins: {
-            "react-hooks": reactHooks
-        },
-        extends: ["react-hooks/recommended"]
+        }
     },
     prettier
 )

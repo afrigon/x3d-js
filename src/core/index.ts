@@ -5,3 +5,4 @@ export * from "./prefab"
 
 export * from "./GameObject"
 export * from "./GameScene"
+export * from "./Renderer"

@@ -1,4 +1,6 @@
-export class WebGL2Renderer {
+import { Renderer } from "../core/Renderer"
+
+export class WebGL2Renderer implements Renderer {
     setup_vao(
         context: WebGL2RenderingContext, 
         program: WebGLProgram, 
@@ -18,7 +20,7 @@ export class WebGL2Renderer {
         }
     }
 
-    init(context: WebGL2RenderingContext, program: WebGLProgram) {
+    init(context: WebGL2RenderingContext) {
         // shader = Shader.compile(context, vertex, fragment)
         context.enable(context.DEPTH_TEST)
         context.enable(context.CULL_FACE)

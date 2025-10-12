@@ -12,5 +12,5 @@
         "isolatedModules": true,
         "outDir": "dist"
     },
-    "include": ["src", "eslint.config.ts", "prettier.config.ts"]
+    "include": ["src"]
 }

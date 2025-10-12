@@ -7,6 +7,8 @@
         "moduleDetection": "force",
 		"resolveJsonModule": true,
         "strict": true,
+		"declaration": true,
+		"declarationMap": true,
         "isolatedModules": true,
         "outDir": "dist"
     },

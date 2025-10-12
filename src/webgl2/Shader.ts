@@ -37,7 +37,7 @@ function linkProgram(context: WebGL2RenderingContext, vertex: WebGLShader, fragm
     return program
 }
 
-export default class Shader {
+export class Shader {
     program: WebGLProgram
     vertex: WebGLShader
     fragment: WebGLShader

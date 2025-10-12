@@ -1,4 +1,4 @@
-export default class PlaneGeometry {
+export class PlaneGeometry {
     vertices: Float32Array
     indices: Uint16Array
     normals: Float32Array

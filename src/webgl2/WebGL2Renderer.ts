@@ -1,4 +1,4 @@
-export default class WebGL2Renderer {
+export class WebGL2Renderer {
     setup_vao(
         context: WebGL2RenderingContext, 
         program: WebGLProgram, 

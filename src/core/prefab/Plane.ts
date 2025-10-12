@@ -1,4 +1,4 @@
-export default class Plane {
+export class Plane {
     constructor() {
 
     }

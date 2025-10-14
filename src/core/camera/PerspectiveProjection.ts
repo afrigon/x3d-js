@@ -1,5 +1,4 @@
-import { Angle } from "../math/Angle"
-import { Mat4 } from "../math/Matrix"
+import { Angle, Mat4 } from "../math"
 import { Projection } from "./Projection"
 
 export class PerspectiveProjection implements Projection {

@@ -1,3 +1,5 @@
 export * from "./Transform"
 export * from "./GameComponent"
 export * from "./Camera"
+export * from "./MeshRenderer"
+export * from "./RendererComponent"

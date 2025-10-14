@@ -1,2 +1,4 @@
-export * from "./Shader"
-export * from "./WebGL2Renderer"
+export * from "./registry"
+
+export * from "./ShaderProgram"
+export * from "./SceneRenderer"

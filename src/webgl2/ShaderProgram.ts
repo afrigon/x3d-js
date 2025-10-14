@@ -1,3 +1,5 @@
+import { Deletable } from "../core/util"
+
 function compileShader(context: WebGL2RenderingContext, type: GLenum, source: string) {
     const shader = context.createShader(type)
 
@@ -37,33 +39,36 @@ function linkProgram(context: WebGL2RenderingContext, vertex: WebGLShader, fragm
     return program
 }
 
-export class Shader {
+export class ShaderProgram implements Deletable {
+    context: WebGL2RenderingContext
     program: WebGLProgram
     vertex: WebGLShader
     fragment: WebGLShader
 
     constructor(
+        context: WebGL2RenderingContext,
         program: WebGLProgram,
         vertex: WebGLShader,
         fragment: WebGLShader
     ) {
+        this.context = context
         this.program = program
         this.vertex = vertex
         this.fragment = fragment
     }
 
-    bind(context: WebGL2RenderingContext) {
-        context.useProgram(this.program)
+    use() {
+        this.context.useProgram(this.program)
     }
 
-    getUniformLocation(context: WebGL2RenderingContext, name: string): WebGLUniformLocation | null {
-        return context.getUniformLocation(this.program, name)
+    getUniformLocation(name: string): WebGLUniformLocation | null {
+        return this.context.getUniformLocation(this.program, name)
     }
 
-    delete(context: WebGL2RenderingContext) {
-        context.deleteShader(this.vertex)
-        context.deleteShader(this.fragment)
-        context.deleteProgram(this.program)
+    delete() {
+        this.context.deleteShader(this.vertex)
+        this.context.deleteShader(this.fragment)
+        this.context.deleteProgram(this.program)
     }
 
     static compile(context: WebGL2RenderingContext, vertex: string, fragment: string): WebGLProgram {
@@ -71,6 +76,6 @@ export class Shader {
         const fragmentShader = compileShader(context, context.FRAGMENT_SHADER, fragment)
         const program = linkProgram(context, vertexShader, fragmentShader)
 
-        return new Shader(program, vertexShader, fragmentShader)
+        return new ShaderProgram(context, program, vertexShader, fragmentShader)
     }
 }

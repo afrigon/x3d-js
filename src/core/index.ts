@@ -1,7 +1,8 @@
 export * from "./component"
 export * from "./geometry"
-export * from "./material"
-export * from "./prefab"
+export * from "./camera"
+export * from "./util"
+export * from "./math"
 
 export * from "./GameObject"
 export * from "./GameScene"

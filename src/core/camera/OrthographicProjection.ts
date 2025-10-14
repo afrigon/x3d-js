@@ -1,4 +1,4 @@
-import { Mat4 } from "../math/Vector"
+import { Mat4 } from "../math/Matrix"
 import { Projection } from "./Projection"
 
 export class OrthographicProjection implements Projection {

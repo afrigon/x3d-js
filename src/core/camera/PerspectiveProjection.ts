@@ -2,19 +2,10 @@ import { Angle, Mat4 } from "../math"
 import { Projection } from "./Projection"
 
 export class PerspectiveProjection implements Projection {
-    _aspectRatio: number
     _fov: Angle
+    _aspectRatio: number
     _near: number
     _far: number
-
-    get aspectRatio(): number {
-        return this._aspectRatio
-    }
-
-    set aspectRatio(value: number) {
-        this.aspectRatio = value
-        this.dirty = true
-    }
 
     get fov(): Angle {
         return this._fov
@@ -22,6 +13,15 @@ export class PerspectiveProjection implements Projection {
 
     set fov(value: Angle) {
         this._fov = value
+        this.dirty = true
+    }
+
+    get aspectRatio(): number {
+        return this._aspectRatio
+    }
+
+    set aspectRatio(value: number) {
+        this.aspectRatio = value
         this.dirty = true
     }
 
@@ -57,19 +57,28 @@ export class PerspectiveProjection implements Projection {
     }
 
     constructor(
-        aspectRatio: number,
         fov: Angle,
+        aspectRatio: number,
         near: number,
         far: number
     ) {
-        this._aspectRatio = aspectRatio
         this._fov = fov
+        this._aspectRatio = aspectRatio
         this._near = near
         this._far = far
         this._matrix = this.recalculate()
     }
 
     recalculate(): Mat4 {
-        return Mat4.identity()
+        const ys = 1 / Math.tan(this.fov.toRadians() * 0.5)
+        const xs = ys / this.aspectRatio
+        const zs = 1 / (this.near - this.far)
+
+        return [
+            xs, 0, 0, 0,
+            0, ys, 0, 0,
+            0, 0, (this.near + this.far) * zs, 1,
+            0, 0, 2 * this.near * this.far * zs, 0
+        ]
     }
 }

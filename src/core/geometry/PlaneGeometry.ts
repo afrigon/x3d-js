@@ -1,19 +1,13 @@
-export class PlaneGeometry {
-    vertices: Float32Array
-    indices: Uint16Array
-    normals: Float32Array
-    uvs: Float32Array
+import { Geometry } from "./Geometry"
 
+export class PlaneGeometry extends Geometry {
     constructor(
         width: number = 1,
         height: number = 1,
         horizontalResolution: number = 1,
         verticalResolution: number = 1
     ) {
-        const vertices = []
-        const indices = []
-        const normals = []
-        const uvs = []
+        super()
 
         const halfWidth = width / 2
         const halfHeight = height / 2
@@ -33,10 +27,10 @@ export class PlaneGeometry {
             for (let j = 0; j < horizontalVextexCount; j++) {
                 const x = j * segmentWidth - halfWidth
 
-                vertices.push(x, y, 0)
-                normals.push(0, 0, 1)
-                uvs.push(j / (horizontalSegmentCount - 1))
-                uvs.push(1 - i / (verticalSegmentCount - 1))
+                this.vertices.push(x, y, 0)
+                this.normals.push(0, 0, 1)
+                this.uvs.push(j / (horizontalSegmentCount - 1))
+                this.uvs.push(1 - i / (verticalSegmentCount - 1))
             }
         }
 
@@ -47,14 +41,9 @@ export class PlaneGeometry {
                 const p3 = (x + 1) + horizontalVextexCount * (y + 1)
                 const p4 = (x + 1) + horizontalVextexCount * y
 
-                indices.push(p1, p2, p3)
-                indices.push(p1, p3, p4)
+                this.indices.push(p1, p2, p3)
+                this.indices.push(p1, p3, p4)
             }
         }
-
-        this.vertices = new Float32Array(vertices)
-        this.indices = new Uint16Array(indices)
-        this.normals = new Float32Array(normals)
-        this.uvs = new Float32Array(uvs)
     }
 }

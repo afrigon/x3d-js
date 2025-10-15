@@ -1,4 +1,4 @@
-import { Deletable } from "../core/util"
+import { Deletable } from "../../core/util"
 
 function compileShader(context: WebGL2RenderingContext, type: GLenum, source: string) {
     const shader = context.createShader(type)
@@ -39,7 +39,7 @@ function linkProgram(context: WebGL2RenderingContext, vertex: WebGLShader, fragm
     return program
 }
 
-export class ShaderProgram implements Deletable {
+export class WebGL2ShaderProgram implements Deletable {
     context: WebGL2RenderingContext
     program: WebGLProgram
     vertex: WebGLShader
@@ -76,6 +76,6 @@ export class ShaderProgram implements Deletable {
         const fragmentShader = compileShader(context, context.FRAGMENT_SHADER, fragment)
         const program = linkProgram(context, vertexShader, fragmentShader)
 
-        return new ShaderProgram(context, program, vertexShader, fragmentShader)
+        return new WebGL2ShaderProgram(context, program, vertexShader, fragmentShader)
     }
 }

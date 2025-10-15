@@ -93,7 +93,41 @@ export class OrthographicProjection implements Projection {
         this._matrix = this.recalculate()
     }
 
+    static fromScreen(
+        width: number,
+        height: number,
+        near: number,
+        far: number
+    ): OrthographicProjection {
+        const halfWidth = width / 2
+        const halfHeight = height / 2
+
+        const projection = new OrthographicProjection(
+            halfHeight,
+            -halfHeight,
+            -halfWidth,
+            halfWidth,
+            near,
+            far
+        )
+
+        return projection
+    }
+
     recalculate(): Mat4 {
-        return Mat4.identity()
+        const xt = -(this.right + this.left) / (this.right - this.left)
+        const yt = -(this.top + this.bottom) / (this.top - this.bottom)
+        const zt = -(this.far + this.near) / (this.far - this.near)
+
+        const xs = 2 / (this.right - this.left)
+        const ys = 2 / (this.top - this.bottom)
+        const zs = 2 / (this.far - this.near)
+
+        return [
+            xs, 0, 0, 0,
+            0, ys, 0, 0,
+            0, 0, zs, 0,
+            xt, yt, zt, 1
+        ]
     }
 }

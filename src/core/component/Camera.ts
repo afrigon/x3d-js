@@ -20,7 +20,7 @@ export class Camera extends GameComponent {
         near: number, 
         far: number
     ): Camera {
-        const projection = new PerspectiveProjection(aspectRatio, angle, near, far)
+        const projection = new PerspectiveProjection(angle, aspectRatio, near, far)
         const camera = new Camera(projection)
 
         return camera

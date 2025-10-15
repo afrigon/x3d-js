@@ -17,7 +17,7 @@ export class GameScene implements Updatable {
         const scene = new GameScene(name)
 
         const camera = new GameObject("MainCamera")
-        camera.addComponent(Camera.perspective(16 / 9, Angle.degrees(90), 0.01, 1000))
+        camera.addComponent(Camera.perspective(16 / 9, Angle.degrees(90), -1000, 1000))
         scene.root.addChild(camera)
 
         const cube = new GameObject("Cube")

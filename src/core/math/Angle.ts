@@ -9,7 +9,7 @@ export class Angle {
         this._value = value
     }
 
-    get toDegrees(): number {
+    toDegrees(): number {
         switch (this.type) {
             case "degrees":
                 return this._value
@@ -18,7 +18,7 @@ export class Angle {
         }
     }
 
-    get toRadians(): number {
+    toRadians(): number {
         switch (this.type) {
             case "degrees":
                 return this._value * Math.PI / 180

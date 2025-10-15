@@ -6,4 +6,3 @@ export * from "./math"
 
 export * from "./GameObject"
 export * from "./GameScene"
-export * from "./Renderer"

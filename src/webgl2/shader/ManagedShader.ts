@@ -25,20 +25,20 @@ export class ManagedShader extends RawShader {
         super({
             id,
             vertex: `
-                ${header}
-                ${precisionHigh}
+${header}
+${precisionHigh}
 
-                ${uniforms.join("\n")}
+${uniforms.join("\n")}
 
-                ${vertex}
+${vertex}
             `,
             fragment: `
-                ${header}
-                ${precisionHigh}
+${header}
+${precisionHigh}
 
-                ${uniforms.join("\n")}
+${uniforms.join("\n")}
 
-                ${fragment}
+${fragment}
             `
         })
     }

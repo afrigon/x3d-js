@@ -69,7 +69,7 @@ export class PerspectiveProjection implements Projection {
         this._matrix = this.recalculate()
     }
 
-    recalculate(): Matrix4 {
+    private recalculate(): Matrix4 {
         const ys = 1 / Math.tan(this.fov.toRadians() * 0.5)
         const xs = ys / this.aspectRatio
         const zs = 1 / (this.near - this.far)

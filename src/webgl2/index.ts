@@ -1,4 +1,5 @@
 export * from "./registry"
+export * from "./shader"
+export * from "./resource"
 
-export * from "./resource/WebGL2ShaderProgram"
 export * from "./SceneRenderer"

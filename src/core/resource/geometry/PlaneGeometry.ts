@@ -1,6 +1,8 @@
 import { Geometry } from "./Geometry"
 
 export class PlaneGeometry extends Geometry {
+    id: string
+
     constructor(
         width: number = 1,
         height: number = 1,
@@ -8,6 +10,8 @@ export class PlaneGeometry extends Geometry {
         verticalResolution: number = 1
     ) {
         super()
+
+        this.id = `builtin-plane-${width}x${height}_${horizontalResolution}x${verticalResolution}`
 
         const halfWidth = width / 2
         const halfHeight = height / 2

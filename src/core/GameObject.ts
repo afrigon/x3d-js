@@ -16,6 +16,7 @@ export class GameObject implements Updatable, Togglable {
         this.name = name
         this.enabled = true
         this.transform = new Transform()
+        this.transform.parent = this
         this.components = []
         this.children = []
     }
@@ -64,5 +65,15 @@ export class GameObject implements Updatable, Togglable {
 
             child.update(delta)
         }
+    }
+
+    query(type: GameComponentType): GameComponent[] {
+        const components = this.getComponents(type)
+
+        for (const child of this.children) {
+            components.concat(child.query(type))
+        }
+
+        return components
     }
 }

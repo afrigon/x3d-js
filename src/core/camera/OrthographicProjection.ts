@@ -1,4 +1,4 @@
-import { Mat4 } from "../math/Matrix"
+import { Matrix4 } from "../math"
 import { Projection } from "./Projection"
 
 export class OrthographicProjection implements Projection {
@@ -63,8 +63,8 @@ export class OrthographicProjection implements Projection {
         this.dirty = true
     }
 
-    private _matrix: Mat4 = Mat4.identity()
-    private dirty: boolean = true
+    private _matrix: Matrix4 = Matrix4.identity
+    private dirty: boolean = false
 
     get matrix() {
         if (this.dirty) {
@@ -114,7 +114,7 @@ export class OrthographicProjection implements Projection {
         return projection
     }
 
-    recalculate(): Mat4 {
+    private recalculate(): Matrix4 {
         const xt = -(this.right + this.left) / (this.right - this.left)
         const yt = -(this.top + this.bottom) / (this.top - this.bottom)
         const zt = -(this.far + this.near) / (this.far - this.near)
@@ -123,11 +123,11 @@ export class OrthographicProjection implements Projection {
         const ys = 2 / (this.top - this.bottom)
         const zs = 2 / (this.far - this.near)
 
-        return [
+        return new Matrix4(
             xs, 0, 0, 0,
             0, ys, 0, 0,
             0, 0, zs, 0,
             xt, yt, zt, 1
-        ]
+        )
     }
 }

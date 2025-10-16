@@ -1,5 +1,5 @@
 export * from "./component"
-export * from "./geometry"
+export * from "./resource"
 export * from "./camera"
 export * from "./util"
 export * from "./math"

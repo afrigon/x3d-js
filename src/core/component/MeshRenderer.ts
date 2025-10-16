@@ -1,16 +1,17 @@
+import { Material } from "../resource"
 import { GameComponentType } from "./GameComponent"
 import { RendererComponent } from "./RendererComponent"
 
 export class MeshRenderer extends RendererComponent {
     type: GameComponentType = "mesh-renderer"
 
-    mesh?: string
-    materials: string[] = []
+    geometry: string
+    material: Material
 
-    constructor(mesh?: string, materials: string[] = []) {
+    constructor(geometry: string, material: Material) {
         super()
 
-        this.mesh = mesh
-        this.materials = materials
+        this.geometry = geometry
+        this.material = material
     }
 }

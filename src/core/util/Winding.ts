@@ -1,0 +1,1 @@
+export type Winding = "clockwise" | "conter-clockwise"

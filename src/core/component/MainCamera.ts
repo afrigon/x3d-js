@@ -1,17 +1,23 @@
 import { OrthographicProjection, PerspectiveProjection } from "../camera"
 import { Projection } from "../camera/Projection"
 import { Angle } from "../math"
+import { Color } from "../util"
 import { GameComponent, GameComponentType } from "./GameComponent"
 
-export class Camera extends GameComponent {
-    type: GameComponentType = "camera"
+export class MainCamera extends GameComponent {
+    type: GameComponentType = "main-camera"
 
-    projection: Projection
+    projection?: Projection
+    backgroundColor: Color
 
-    constructor(projection: Projection) {
+    constructor(
+        projection?: Projection,
+        backgroundColor: Color = Color.rgb(110)
+    ) {
         super()
 
         this.projection = projection
+        this.backgroundColor = backgroundColor
     }
 
     static perspective(
@@ -19,9 +25,9 @@ export class Camera extends GameComponent {
         angle: Angle, 
         near: number, 
         far: number
-    ): Camera {
+    ): MainCamera {
         const projection = new PerspectiveProjection(angle, aspectRatio, near, far)
-        const camera = new Camera(projection)
+        const camera = new MainCamera(projection)
 
         return camera
     }
@@ -33,9 +39,9 @@ export class Camera extends GameComponent {
         right: number, 
         near: number, 
         far: number
-    ): Camera {
+    ): MainCamera {
         const projection = new OrthographicProjection(top, bottom, left, right, near, far)
-        const camera = new Camera(projection)
+        const camera = new MainCamera(projection)
 
         return camera
     }

@@ -1,4 +1,4 @@
-import { Angle, Mat4 } from "../math"
+import { Angle, Matrix4 } from "../math"
 import { Projection } from "./Projection"
 
 export class PerspectiveProjection implements Projection {
@@ -43,10 +43,10 @@ export class PerspectiveProjection implements Projection {
         this.dirty = true
     }
 
-    private _matrix: Mat4 = Mat4.identity()
-    private dirty: boolean = true
+    private _matrix: Matrix4 = Matrix4.identity
+    private dirty: boolean = false
 
-    get matrix() {
+    get matrix(): Matrix4 {
         if (this.dirty) {
             this.dirty = false
             
@@ -69,16 +69,16 @@ export class PerspectiveProjection implements Projection {
         this._matrix = this.recalculate()
     }
 
-    recalculate(): Mat4 {
+    recalculate(): Matrix4 {
         const ys = 1 / Math.tan(this.fov.toRadians() * 0.5)
         const xs = ys / this.aspectRatio
         const zs = 1 / (this.near - this.far)
 
-        return [
+        return new Matrix4(
             xs, 0, 0, 0,
             0, ys, 0, 0,
             0, 0, (this.near + this.far) * zs, 1,
             0, 0, 2 * this.near * this.far * zs, 0
-        ]
+        )
     }
 }

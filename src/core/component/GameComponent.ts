@@ -3,8 +3,9 @@ import { GameObject } from "../GameObject"
 import { Togglable, Updatable } from "../util"
 
 export type GameComponentType = 
+    | "main-camera"
     | "mesh-renderer"
-    | "camera"
+    | "transform"
 
 export abstract class GameComponent implements Updatable, Togglable {
     id: UUID = randomUUID()

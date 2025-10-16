@@ -1,25 +1,19 @@
 import { Deletable } from "./Deletable"
+import { Identifiable } from "./Identifiable"
 
-export abstract class Registry<T extends Deletable> implements Deletable {
+export abstract class Registry<T extends Identifiable & Deletable> implements Deletable {
     items: Map<string, T> = new Map()
 
-    register(key: string, item: T) {
-        this.items.set(key, item)
+    register(item: T) {
+        this.items.set(item.id, item)
+    }
+
+    has(key: string): boolean {
+        return this.items.has(key)
     }
 
     get(key: string): T | undefined {
         return this.items.get(key)
-    }
-
-    getOrRegister(key: string, factory: () => T): T | undefined {
-        let item = this.items.get(key)
-
-        if (!item) {
-            item = factory()
-            this.register(key, item)
-        }
-
-        return item
     }
 
     remove(key: string) {

@@ -1,5 +1,5 @@
-import { Mat4 } from "../math/Matrix"
+import { Matrix4 } from "../math"
 
 export interface Projection {
-    get matrix(): Mat4
+    get matrix(): Matrix4
 }

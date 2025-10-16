@@ -30,12 +30,14 @@
     "lint": "eslint src prettier.config.ts eslint.config.ts --fix",
     "prettier": "prettier src prettier.config.ts eslint.config.ts --write",
     "type-check": "tsc --noEmit",
-    "build": "tsc",
+    "build": "rollup -c",
     "clean": "rimraf dist",
-    "prepare": "rimraf dist && tsc"
+    "prepare": "rimraf dist && rollup -c"
   },
   "devDependencies": {
     "@eslint/js": "^9.36.0",
+    "@rollup/plugin-node-resolve": "^16.0.3",
+    "@rollup/plugin-typescript": "^12.1.4",
     "@types/node": "^24.6.2",
     "@typescript-eslint/eslint-plugin": "^8.46.0",
     "eslint": "^9.36.0",
@@ -43,6 +45,8 @@
     "jiti": "^2.6.1",
     "prettier": "^3.6.2",
     "rimraf": "^6.0.1",
+    "rollup": "^4.52.4",
+    "tslib": "^2.8.1",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.45.0"
   }

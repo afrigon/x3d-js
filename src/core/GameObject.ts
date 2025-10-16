@@ -70,7 +70,7 @@ export class GameObject implements Updatable, Togglable {
         const components = this.getComponents(type)
 
         for (const child of this.children) {
-            components.concat(child.query(type))
+            components.push(...child.query(type))
         }
 
         return components

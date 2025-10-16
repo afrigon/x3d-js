@@ -1,10 +1,11 @@
-import { Matrix4, Vector2, Vector3 } from "../../core"
+import { Matrix4, Vector2, Vector3, Vector4 } from "../../core"
 
 export type ShaderParamType = {
     float: number
     bool: boolean
     vec2: Vector2
     vec3: Vector3
+    vec4: Vector4
     mat4: Matrix4
 }
 

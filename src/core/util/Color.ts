@@ -1,3 +1,5 @@
+import { Vector4 } from "../math"
+
 export class Color {
     r: number
     g: number
@@ -80,5 +82,9 @@ export class Color {
             this.b / 255,
             this.a / 255
         ]
+    }
+
+    get vector(): Vector4 {
+        return new Vector4(this.r, this.g, this.b, this.a)
     }
 }

@@ -1,4 +1,4 @@
-import { Vector3 } from "../../core"
+import { Color } from "../../core"
 import vertex from "./assets/default_vertex.glsl?raw"
 import unlit from "./assets/unlit_fragment.glsl?raw"
 
@@ -13,7 +13,7 @@ export class UnlitShader extends ManagedShader {
             fragment: unlit,
             params: [
                 ...ShaderParam.default(),
-                new ShaderParam("vec3", "color", Vector3.one)
+                new ShaderParam("vec4", "color", Color.white.vector)
             ]
         })
     }

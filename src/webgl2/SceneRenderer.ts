@@ -128,21 +128,25 @@ export class SceneRenderer implements Deletable {
         this.registries.delete()
     }
 
-    registerGeometry(geometry: Geometry) {
+    registerGeometry(geometry: Geometry): string {
         if (this.registries.geometries.has(geometry.id)) {
-            return
+            return geometry.id
         }
 
         const item = new WebGL2Geometry(this.gl, geometry)
         this.registries.geometries.register(item)
+
+        return geometry.id
     }
 
-    registerShader(shader: Shader) {
+    registerShader(shader: Shader): string {
         if (this.registries.shaders.has(shader.id)) {
-            return
+            return shader.id
         }
 
         const item = new WebGL2ShaderProgram(this.gl, shader)
         this.registries.shaders.register(item)
+
+        return shader.id
     }
 }

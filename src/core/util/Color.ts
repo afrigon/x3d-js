@@ -33,35 +33,35 @@ export class Color {
         return new Color(r, g ?? r, b ?? r, a ?? 1)
     }
 
-    static white(): Color {
+    static get white(): Color {
         return new Color(255, 255, 255)
     }
 
-    static black(): Color {
+    static get black(): Color {
         return new Color(0, 0, 0)
     }
 
-    static red(): Color {
+    static get red(): Color {
         return new Color(255, 0, 0)
     }
 
-    static green(): Color {
+    static get green(): Color {
         return new Color(0, 255, 0)
     }
 
-    static blue(): Color {
+    static get blue(): Color {
         return new Color(0, 0, 255)
     }
 
-    static yellow(): Color {
+    static get yellow(): Color {
         return new Color(255, 255, 0)
     }
 
-    static aqua(): Color {
+    static get aqua(): Color {
         return new Color(0, 255, 255)
     }
 
-    static pink(): Color {
+    static get pink(): Color {
         return new Color(255, 0, 255)
     }
 

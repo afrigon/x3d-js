@@ -32,7 +32,13 @@ export class WebGL2ShaderProgram implements Identifiable, Deletable {
         }
 
         this.context.shaderSource(shader, source.trim())
-        this.context.compileShader(shader)
+
+        try {
+            this.context.compileShader(shader)
+        } catch (error) {
+            console.error(error)
+            throw new Error("x3d: failed to compile shader code")
+        }
 
         if (!this.context.getShaderParameter(shader, this.context.COMPILE_STATUS)) {
             const error = this.context.getShaderInfoLog(shader) || "x3d: could not compile shader for an unknown reason"

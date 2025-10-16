@@ -74,7 +74,7 @@ export class SceneRenderer implements Deletable {
 
         const vp = Matrix4.multiply(projection, view)
 
-        const globals: ShaderGlobals = {
+        let globals: ShaderGlobals = {
             time: now,
             deltaTime,
             resolution: new Vector2(this._width, this._height),

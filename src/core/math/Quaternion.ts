@@ -1,3 +1,6 @@
+import { Angle } from "./Angle"
+import { Vector3 } from "./Vector3"
+
 export class Quaternion {
     x: number
     y: number
@@ -13,5 +16,11 @@ export class Quaternion {
 
     static get identity(): Quaternion {
         return new Quaternion(0, 0, 0, 1)
+    }
+
+    static fromAxis(axis: Vector3, angle: Angle): Quaternion {
+        const h = angle.toRadians() * 0.5
+        const s = Math.sin(h)
+        return new Quaternion(axis.x * s, axis.y * s, axis.z * s, Math.cos(h))
     }
 }

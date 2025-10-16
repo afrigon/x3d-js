@@ -72,13 +72,13 @@ export class PerspectiveProjection implements Projection {
     private recalculate(): Matrix4 {
         const ys = 1 / Math.tan(this.fov.toRadians() / 2)
         const xs = ys / this.aspectRatio
-        const zs = 1 / (this.near - this.far)
+        const zs = 1 / (this.far - this.near)
 
         return new Matrix4(
             xs, 0, 0, 0,
             0, ys, 0, 0,
-            0, 0, (this.near + this.far) * zs, -1,
-            0, 0, 2 * this.near * this.far * zs, 0
+            0, 0, (this.near + this.far) * zs, 1,
+            0, 0, -2 * this.near * this.far * zs, 0
         )
     }
 }

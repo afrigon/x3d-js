@@ -102,10 +102,12 @@ export class SceneRenderer implements Deletable {
                 continue
             }
 
-            shader.setup({
-                ...globals,
-                ...component.material.params()
+            const params = component.material.params()
+            Object.entries(globals).forEach(([k, v]) => {
+                params.set(k, v)
             })
+
+            shader.setup(params)
 
             const geometry = this.registries.geometries.get(component.geometry)
 

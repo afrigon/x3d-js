@@ -25,7 +25,7 @@ export class ShaderParam<K extends keyof ShaderParamType> {
     static default(): AnyShaderParam[] {
         return [
             new ShaderParam("float", "time", 0),
-            new ShaderParam("float", "delta_time", 0),
+            new ShaderParam("float", "deltaTime", 0),
             new ShaderParam("vec2", "resolution", new Vector2(1920, 1080)),
             new ShaderParam("mat4", "projection", Matrix4.identity),
             new ShaderParam("mat4", "view", Matrix4.identity),

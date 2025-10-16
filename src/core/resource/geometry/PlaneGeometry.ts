@@ -31,8 +31,8 @@ export class PlaneGeometry extends Geometry {
             for (let j = 0; j < horizontalVextexCount; j++) {
                 const x = j * segmentWidth - halfWidth
 
-                this.vertices.push(x, y, 0)
-                this.normals.push(0, 0, 1)
+                this.vertices.push(x, 0, y)
+                this.normals.push(0, 1, 0)
                 this.uvs.push(j / (horizontalSegmentCount - 1))
                 this.uvs.push(1 - i / (verticalSegmentCount - 1))
             }

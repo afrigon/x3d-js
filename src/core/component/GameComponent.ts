@@ -1,4 +1,3 @@
-import { UUID, randomUUID } from "crypto"
 import { GameObject } from "../GameObject"
 import { Togglable, Updatable } from "../util"
 
@@ -8,7 +7,7 @@ export type GameComponentType =
     | "transform"
 
 export abstract class GameComponent implements Updatable, Togglable {
-    id: UUID = randomUUID()
+    id: string = crypto.randomUUID()
     enabled: boolean = true
     parent?: GameObject
 

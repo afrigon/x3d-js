@@ -26,7 +26,7 @@ export class WebGL2Geometry implements Identifiable, Deletable {
 
         this.indices = this.context.createBuffer()
         this.context.bindBuffer(context.ELEMENT_ARRAY_BUFFER, this.indices)
-        this.context.bufferData(this.context.ARRAY_BUFFER, new Int32Array(geometry.indices), this.context.STATIC_DRAW)
+        this.context.bufferData(context.ELEMENT_ARRAY_BUFFER, new Int32Array(geometry.indices), context.STATIC_DRAW)
 
         context.bindVertexArray(null)
     }

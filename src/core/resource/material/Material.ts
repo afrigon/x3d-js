@@ -2,10 +2,10 @@ import { CullingMode, Winding } from "../../util"
 import { MaterialValue } from "./MaterialValue"
 
 export interface MaterialProps {
-    opaque: boolean
-    cullingMode: CullingMode
-    frontFacing: Winding
-    wireframe: boolean
+    opaque?: boolean
+    cullingMode?: CullingMode
+    frontFacing?: Winding
+    wireframe?: boolean
 }
 
 export abstract class Material {
@@ -24,9 +24,9 @@ export abstract class Material {
         frontFacing,
         wireframe
     }: MaterialProps) {
-        this.opaque = opaque
-        this.cullingMode = cullingMode
-        this.frontFacing = frontFacing
-        this.wireframe = wireframe
+        this.opaque = opaque ?? false
+        this.cullingMode = cullingMode ?? "back"
+        this.frontFacing = frontFacing ?? "clockwise"
+        this.wireframe = wireframe ?? false
     }
 }

@@ -68,7 +68,7 @@ export class WebGL2ShaderProgram implements Identifiable, Deletable {
     setup(params: Map<string, MaterialValue>) {
         this.context.useProgram(this.program)
 
-        for (const [ key, value ] of Object.entries(params)) {
+        for (const [ key, value ] of params) {
             const location = this.context.getUniformLocation(this.program, key)
 
             if (!location) {

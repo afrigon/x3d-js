@@ -41,6 +41,7 @@ export class SceneRenderer implements Deletable {
         }
 
         this.gl = gl
+        this.gl.enable(this.gl.DEPTH_TEST)
     }
 
     resize(width: number, height: number) {

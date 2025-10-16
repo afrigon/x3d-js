@@ -84,7 +84,8 @@ export class WebGL2ShaderProgram implements Identifiable, Deletable {
             } else if (value instanceof Vector3) {
                 this.context.uniform3f(location, value.x, value.y, value.z)
             } else if (value instanceof Color) {
-                this.context.uniform4f(location, value.r, value.g, value.b, value.a)
+                const c = value.rgbaFloat()
+                this.context.uniform4f(location, c[0], c[1], c[2], c[3])
             } else if (value instanceof Matrix4) {
                 this.context.uniformMatrix4fv(location, false, value.float32Array())
             }

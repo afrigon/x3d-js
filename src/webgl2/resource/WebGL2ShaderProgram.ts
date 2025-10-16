@@ -72,8 +72,6 @@ export class WebGL2ShaderProgram implements Identifiable, Deletable {
             const location = this.context.getUniformLocation(this.program, key)
 
             if (!location) {
-                const error = this.context.getError()
-                console.error(`x3d: could not find uniform location for ${key} (${error})`)
                 continue
             }
 

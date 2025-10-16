@@ -25,25 +25,21 @@ export class WebGL2ShaderProgram implements Identifiable, Deletable {
     }
 
     private compile(type: GLenum, source: string): WebGLShader {
-        const shader = this.context.createShader(type)
+        console.debug(`x3d: compiling shader: \n\n${source}`)
 
+        const shader = this.context.createShader(type)
+        
         if (!shader) {
             throw new Error("x3d: could not create shader")
         }
 
         this.context.shaderSource(shader, source.trim())
-
-        try {
-            this.context.compileShader(shader)
-        } catch (error) {
-            console.error(error)
-            throw new Error("x3d: failed to compile shader code")
-        }
+        this.context.compileShader(shader)
 
         if (!this.context.getShaderParameter(shader, this.context.COMPILE_STATUS)) {
             const error = this.context.getShaderInfoLog(shader) || "x3d: could not compile shader for an unknown reason"
             this.context.deleteShader(shader)
-            throw new Error(error)
+            throw new Error(`x3d: ${error}`)
         }
 
         return shader

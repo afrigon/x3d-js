@@ -1,4 +1,4 @@
-import { Deletable, GameScene, Geometry, MainCamera, MaterialStruct, flatten, Matrix4, MeshRenderer, Vector2 } from "../core"
+import { Deletable, GameScene, Geometry, MainCamera, MaterialStruct, flatten, Matrix4, MeshRenderer, Vector2, Input } from "../core"
 import { Registries } from "./registry/Registries"
 import { WebGL2Geometry, WebGL2ShaderProgram } from "./resource"
 import { Shader } from "./shader"

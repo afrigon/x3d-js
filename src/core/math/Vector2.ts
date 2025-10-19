@@ -7,6 +7,32 @@ export class Vector2 {
         this.y = y
     }
 
+    magnitude(): number {
+        return Math.sqrt(Vector2.dot(this, this))
+    }
+
+    normalized(): Vector2 {
+        const m = this.magnitude()
+
+        return new Vector2(this.x / m, this.y / m)
+    }
+
+    static add(a: Vector2, b: Vector2, ...rest: Vector2[]): Vector2 {
+        const result = new Vector2(a.x + b.x, a.y + b.y)
+
+        const next = rest[0]
+
+        if (!next) {
+            return result
+        } 
+
+        return Vector2.add(result, next, ...rest.slice(1))
+    }
+
+    static dot(a: Vector2, b: Vector2): number {
+        return a.x * b.x + a.y * b.y
+    }
+
     static get zero(): Vector2 {
         return new Vector2(0, 0)
     }

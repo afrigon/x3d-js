@@ -1,5 +1,6 @@
 import { GameComponent, GameComponentType, MainCamera } from "./component"
 import { GameObject } from "./GameObject"
+import { Input } from "./input"
 import { Angle } from "./math"
 import { Updatable } from "./util"
 
@@ -26,12 +27,12 @@ export class GameScene implements Updatable {
         return scene
     }
 
-    update(delta: number) {
+    update(input: Input, delta: number) {
         if (!this.root.enabled) {
             return    
         }
 
-        this.root.update(delta)
+        this.root.update(input, delta)
     }
 
     query(type: GameComponentType): GameComponent[] {

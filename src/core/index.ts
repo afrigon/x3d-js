@@ -3,6 +3,7 @@ export * from "./resource"
 export * from "./camera"
 export * from "./util"
 export * from "./math"
+export * from "./input"
 
 export * from "./GameObject"
 export * from "./GameScene"

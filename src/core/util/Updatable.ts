@@ -1,3 +1,5 @@
+import { Input } from "../input"
+
 export interface Updatable {
-    update(delta: number): void
+    update(input: Input, delta: number): void
 }

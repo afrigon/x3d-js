@@ -1,4 +1,5 @@
 import { GameComponent, GameComponentType, Transform } from "./component"
+import { Input } from "./input"
 import { Togglable, Updatable } from "./util"
 
 export class GameObject implements Updatable, Togglable {
@@ -48,13 +49,13 @@ export class GameObject implements Updatable, Togglable {
         return this.components.filter(c => c.type == type)
     }
 
-    update(delta: number) {
+    update(input: Input, delta: number) {
         for (const component of this.components) {
             if (!component.enabled) {
                 continue
             }
 
-            component.update(delta)
+            component.update(input, delta)
         }
 
         for (const child of this.children) {
@@ -62,7 +63,7 @@ export class GameObject implements Updatable, Togglable {
                 continue
             }
 
-            child.update(delta)
+            child.update(input, delta)
         }
     }
 

@@ -20,6 +20,10 @@ export class Vector3 {
     normalized(): Vector3 {
         const m = this.magnitude()
 
+        if (m == 0) {
+            return Vector3.zero
+        }
+
         return new Vector3(this.x / m, this.y / m, this.z / m)
     }
 

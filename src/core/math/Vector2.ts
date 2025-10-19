@@ -14,6 +14,10 @@ export class Vector2 {
     normalized(): Vector2 {
         const m = this.magnitude()
 
+        if (m == 0) {
+            return Vector2.zero
+        }
+
         return new Vector2(this.x / m, this.y / m)
     }
 

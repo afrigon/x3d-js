@@ -9,7 +9,7 @@ export type MaterialPrimitive =
     | { type: "vector4", value: Vector4 }
     | { type: "matrix4", value: Matrix4 }
 
-export type MaterialArray = { type: "array", of: Omit<MaterialPrimitive, "value">, value: MaterialPrimitive["value"][] }
+export type MaterialArray = { type: "array", of: Omit<MaterialValue, "value">, value: MaterialValue[] }
 export type MaterialStruct = { type: "struct", fields: Record<string, MaterialValue> }
 export type MaterialValue = MaterialPrimitive | MaterialArray | MaterialStruct
 
@@ -30,7 +30,7 @@ export function flatten(values: MaterialValues): MaterialPrimitives {
 
         if (value.type == "array") {
             for (let i = 0; i < value.value.length; ++i) {
-                flat[`${key}[${i}]`] = { type: value.of.type, value: value.value[i] } as MaterialPrimitive
+                visit(`${key}[${i}]`, value.value[i])
             }
 
             return

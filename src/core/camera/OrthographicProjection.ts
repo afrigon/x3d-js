@@ -121,7 +121,7 @@ export class OrthographicProjection implements Projection {
 
         const xs = 2 / (this.right - this.left)
         const ys = 2 / (this.top - this.bottom)
-        const zs = 2 / (this.far - this.near)
+        const zs = -2 / (this.far - this.near)
 
         return new Matrix4(
             xs, 0, 0, 0,

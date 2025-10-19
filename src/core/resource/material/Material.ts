@@ -16,7 +16,7 @@ export abstract class Material {
     frontFacing: Winding
     wireframe: boolean
 
-    abstract params(): Map<string, MaterialValue>
+    abstract params(): Record<string, MaterialValue>
 
     constructor({ 
         opaque, 

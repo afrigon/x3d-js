@@ -1,5 +1,5 @@
-import { MaterialValue, Matrix4, Vector2, Vector3 } from "../../core"
-import { Color, Deletable, Identifiable } from "../../core/util"
+import { MaterialPrimitives } from "../../core"
+import { Deletable, Identifiable } from "../../core/util"
 import { Shader } from "../shader"
 
 export class WebGL2ShaderProgram implements Identifiable, Deletable {
@@ -65,29 +65,41 @@ export class WebGL2ShaderProgram implements Identifiable, Deletable {
         return program
     }
 
-    setup(params: Map<string, MaterialValue>) {
+    setup(params: MaterialPrimitives) {
         this.context.useProgram(this.program)
 
-        for (const [ key, value ] of params) {
+        for (const key in params) {
+            // TODO: uniform location cache
             const location = this.context.getUniformLocation(this.program, key)
 
             if (!location) {
                 continue
             }
 
-            if (typeof value == "number") {
-                this.context.uniform1f(location, value)
-            } else if (typeof value == "boolean") {
-                this.context.uniform1f(location, value ? 1 : 0)
-            } else if (value instanceof Vector2) {
-                this.context.uniform2f(location, value.x, value.y)
-            } else if (value instanceof Vector3) {
-                this.context.uniform3f(location, value.x, value.y, value.z)
-            } else if (value instanceof Color) {
-                const c = value.rgbaFloat()
-                this.context.uniform4f(location, c[0], c[1], c[2], c[3])
-            } else if (value instanceof Matrix4) {
-                this.context.uniformMatrix4fv(location, false, value.float32Array())
+            const { type, value } = params[key]
+
+            switch (type) {
+                case "boolean":
+                    this.context.uniform1f(location, value ? 1 : 0)
+                    break
+                case "float":
+                    this.context.uniform1f(location, value)
+                    break
+                case "integer":
+                    this.context.uniform1i(location, value)
+                    break
+                case "vector2":
+                    this.context.uniform2f(location, value.x, value.y)
+                    break
+                case "vector3":
+                    this.context.uniform3f(location, value.x, value.y, value.z)
+                    break
+                case "vector4":
+                    this.context.uniform4f(location, value.x, value.y, value.z, value.w)
+                    break
+                case "matrix4":
+                    this.context.uniformMatrix4fv(location, false, value.float32Array())
+                    break
             }
         }
     }

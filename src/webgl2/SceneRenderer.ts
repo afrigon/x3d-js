@@ -1,7 +1,7 @@
-import { Deletable, GameScene, Geometry, MainCamera, Matrix4, MeshRenderer, Vector2 } from "../core"
+import { Deletable, GameScene, Geometry, MainCamera, MaterialStruct, flatten, Matrix4, MeshRenderer, Vector2 } from "../core"
 import { Registries } from "./registry/Registries"
 import { WebGL2Geometry, WebGL2ShaderProgram } from "./resource"
-import { Shader, ShaderGlobals } from "./shader"
+import { Shader } from "./shader"
 
 interface SceneRendererProps {
     canvas: HTMLCanvasElement
@@ -60,7 +60,8 @@ export class SceneRenderer implements Deletable {
             return
         }
 
-        this.gl.clearColor(...camera.backgroundColor.rgbaFloat())
+        const clearColor = camera.backgroundColor.rgbaFloat()
+        this.gl.clearColor(clearColor.x, clearColor.y, clearColor.z, clearColor.w)
         this.gl.clearDepth(1)
         this.gl.clear(this.gl.COLOR_BUFFER_BIT | this.gl.DEPTH_BUFFER_BIT)
 
@@ -75,16 +76,14 @@ export class SceneRenderer implements Deletable {
 
         const vp = Matrix4.multiply(projection, view)
 
-        const globals: ShaderGlobals = {
-            time: now,
-            deltaTime,
-            resolution: new Vector2(this._width, this._height),
-            projection,
-            view,
-            model: Matrix4.identity,
-            vp,
-            mvp: Matrix4.identity,
-        }
+        const globals: MaterialStruct = { type: "struct", fields: {
+            time: { type: "float", value: now },
+            deltaTime: { type: "float", value: deltaTime },
+            resolution: { type: "vector2", value: new Vector2(this._width, this._height) },
+            projection: { type: "matrix4", value: projection },
+            view: { type: "matrix4", value: view },
+            vp: { type: "matrix4", value: vp }
+        }}
 
         for (const mesh of meshes) {
             const component = mesh as MeshRenderer
@@ -93,8 +92,11 @@ export class SceneRenderer implements Deletable {
                 continue
             }
 
-            globals.model = mesh.parent?.transform.matrix ?? Matrix4.identity
-            globals.mvp = Matrix4.multiply(vp, globals.model)
+            const model = mesh.parent?.transform.matrix ?? Matrix4.identity
+            const mvp = Matrix4.multiply(vp, model)
+
+            globals.fields.model = { type: "matrix4", value: model }
+            globals.fields.mvp = { type: "matrix4", value: mvp }
 
             const material = component.material
             const shader = this.registries.shaders.get(material.shader)
@@ -104,11 +106,9 @@ export class SceneRenderer implements Deletable {
             }
 
             const params = component.material.params()
-            Object.entries(globals).forEach(([k, v]) => {
-                params.set(k, v)
-            })
+            params.globals = globals
 
-            shader.setup(params)
+            shader.setup(flatten(params))
 
             const geometry = this.registries.geometries.get(component.geometry)
 

@@ -1,4 +1,4 @@
-import { Vector4 } from "../math"
+import { Vector3, Vector4 } from "../math"
 
 export class Color {
     r: number
@@ -67,24 +67,28 @@ export class Color {
         return new Color(255, 0, 255)
     }
 
-    rgbFloat(): [number, number, number] {
-        return [
+    rgbFloat(): Vector3 {
+        return new Vector3(
             this.r / 255, 
             this.g / 255,
             this.b / 255
-        ]
+        )
     }
 
-    rgbaFloat(): [number, number, number, number] {
-        return [
+    rgbaFloat(): Vector4 {
+        return new Vector4(
             this.r / 255, 
             this.g / 255,
             this.b / 255,
             this.a / 255
-        ]
+        )
     }
 
-    get vector(): Vector4 {
+    rgb(): Vector3 {
+        return new Vector3(this.r, this.g, this.b)
+    }
+
+    rgba(): Vector4 {
         return new Vector4(this.r, this.g, this.b, this.a)
     }
 }

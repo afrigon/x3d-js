@@ -16,9 +16,9 @@ export class UnlitMaterial extends Material {
         this.color = props.color
     }
 
-    params(): Map<string, MaterialValue> {
-        return new Map(Object.entries({
-            color: this.color
-        }))
+    params(): Record<string, MaterialValue> {
+        return {
+            "color": { type: "vector3", value: this.color.rgbFloat() }
+        }
     }
 }

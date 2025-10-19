@@ -27,6 +27,10 @@ export class Vector3 {
         return new Vector3(this.x / m, this.y / m, this.z / m)
     }
 
+    static equal(a: Vector3, b: Vector3): boolean {
+        return a.x == b.x && a.y == b.y && a.z == b.z
+    }
+
     static add(a: Vector3, b: Vector3, ...rest: Vector3[]): Vector3 {
         const result = new Vector3(a.x + b.x, a.y + b.y, a.z + b.z)
 
@@ -46,7 +50,7 @@ export class Vector3 {
     static cross(a: Vector3, b: Vector3): Vector3 {
         return new Vector3(
             a.y * b.z - a.z * b.y,
-            a.z * b.z - a.x * b.z,
+            a.z * b.x - a.x * b.z,
             a.x * b.y - a.y * b.x
         )
     }

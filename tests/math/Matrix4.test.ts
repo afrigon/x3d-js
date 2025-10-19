@@ -12,12 +12,12 @@ function sample(): Matrix4 {
     )
 }
 
-test("equal", () => {
+test("Matrix4.equal", () => {
     const A = sample()
     assert.equal(Matrix4.equal(A, A), true)
 })
 
-test("non equal", () => {
+test("Matrix4.equal: non equal", () => {
     const A = sample()
     const B = sample()
 
@@ -26,7 +26,7 @@ test("non equal", () => {
     assert.equal(Matrix4.equal(A, B), false)
 })
 
-test("identity", () => {
+test("Matrix4.identity", () => {
     assert.equal(
         Matrix4.equal(
             Matrix4.identity,
@@ -41,14 +41,14 @@ test("identity", () => {
     )
 })
 
-test("multiply: identity is neutral", () => {
+test("Matrix4.multiply: identity is neutral", () => {
     const A = sample()
 
     assert.equal(Matrix4.equal(Matrix4.multiply(Matrix4.identity, A), A), true)
     assert.equal(Matrix4.equal(Matrix4.multiply(A, Matrix4.identity), A), true)
 })
 
-test("multiply: associativity", () => {
+test("Matrix4.multiply: associativity", () => {
     const A = new Matrix4(
         1, 2, 3, 4, 
         0, 1, 4, 5, 
@@ -74,7 +74,7 @@ test("multiply: associativity", () => {
     assert.equal(Matrix4.equal(left, right), true)
 })
 
-test("determinant: identity, translation, scaling", () => {
+test("Matrix4.determinant: identity, translation, scaling", () => {
     assert.equal(Matrix4.identity.determinant(), 1)
 
     const T = new Matrix4(
@@ -94,7 +94,7 @@ test("determinant: identity, translation, scaling", () => {
     assert.equal(S.determinant(), 24)
 })
 
-test("inverse: scale", () => {
+test("Matrix4.inverse: scale", () => {
     const S = new Matrix4(
         2, 0, 0, 0,
         0, 1, 0, 0,
@@ -113,10 +113,7 @@ test("inverse: scale", () => {
     assert.ok(Matrix4.equal(Matrix4.multiply(S, S.inverse()), Matrix4.identity))
 })
 
-test("inverse: rotation", () => {
-    const c = 0
-    const s = 1
-
+test("Matrix4.inverse: rotation", () => {
     const R = new Matrix4(
         0, -1, 0, 0,
         1, 0, 0, 0,
@@ -135,7 +132,7 @@ test("inverse: rotation", () => {
     assert.ok(Matrix4.equal(Matrix4.multiply(R, R.inverse()), Matrix4.identity))
 })
 
-test("inverse: translation", () => {
+test("Matrix4.inverse: translation", () => {
     const T = new Matrix4(
         1, 0, 0, 0,
         0, 1, 0, 0,
@@ -154,7 +151,7 @@ test("inverse: translation", () => {
     assert.ok(Matrix4.equal(Matrix4.multiply(T, iT), Matrix4.identity))
 })
 
-test("inverse: singular matrix returns identity", () => {
+test("Matrix4.inverse: singular matrix returns identity", () => {
     const M = new Matrix4(
         1, 2, 3, 4,
         5, 6, 7, 8,

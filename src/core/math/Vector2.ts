@@ -21,6 +21,10 @@ export class Vector2 {
         return new Vector2(this.x / m, this.y / m)
     }
 
+    static equal(a: Vector2, b: Vector2): boolean {
+        return a.x == b.x && a.y == b.y
+    }
+
     static add(a: Vector2, b: Vector2, ...rest: Vector2[]): Vector2 {
         const result = new Vector2(a.x + b.x, a.y + b.y)
 

@@ -27,7 +27,6 @@ export class FPSController extends GameComponent {
 
         const maxPitch = Angle.degrees(89).toRadians()
 
-        console.log(input.cursorDelta)
         this.rotation.x += input.cursorDelta.x * this.sensitivity
         this.rotation.y += input.cursorDelta.y * this.sensitivity
         this.rotation.y = Math.min(Math.max(this.rotation.y, -maxPitch), maxPitch)

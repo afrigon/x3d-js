@@ -22,7 +22,11 @@ export class Quaternion {
         const v = new Vector3(this.x, this.y, this.z)
         const t = Vector3.cross(v, vector).scaled(2)
         
-        return Vector3.add(v, t.scaled(this.w), Vector3.cross(v, t))
+        return Vector3.add(vector, t.scaled(this.w), Vector3.cross(v, t))
+    }
+    
+    static equal(a: Quaternion, b: Quaternion): boolean {
+        return a.x == b.x && a.y == b.y && a.z == b.z && a.w == b.w
     }
 
     static multiply(a: Quaternion, b: Quaternion, ...rest: Quaternion[]): Quaternion {

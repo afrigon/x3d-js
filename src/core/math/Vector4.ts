@@ -25,6 +25,10 @@ export class Vector4 {
         return new Vector4(this.x / m, this.y / m, this.z / m, this.w / m)
     }
 
+    static equal(a: Vector4, b: Vector4): boolean {
+        return a.x == b.x && a.y == b.y && a.z == b.z && a.w == b.w
+    }
+
     static add(a: Vector4, b: Vector4, ...rest: Vector4[]): Vector4 {
         const result = new Vector4(a.x + b.x, a.y + b.y, a.z + b.z, a.w + b.w)
 

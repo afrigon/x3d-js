@@ -98,7 +98,7 @@ export class WebGL2ShaderProgram implements Identifiable, Deletable {
                     this.context.uniform4f(location, value.x, value.y, value.z, value.w)
                     break
                 case "matrix4":
-                    this.context.uniformMatrix4fv(location, false, value.float32Array())
+                    this.context.uniformMatrix4fv(location, false, value.m)
                     break
             }
         }

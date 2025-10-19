@@ -1,5 +1,5 @@
 struct Globals {
-    float now;
+    float time;
     float deltaTime;
     vec2 resolution;
     mat4 projection;

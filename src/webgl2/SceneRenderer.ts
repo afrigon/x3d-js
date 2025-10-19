@@ -66,7 +66,7 @@ export class SceneRenderer implements Deletable {
         this.gl.clear(this.gl.COLOR_BUFFER_BIT | this.gl.DEPTH_BUFFER_BIT)
 
         const projection = camera.projection?.matrix ?? Matrix4.identity
-        const view = camera.parent?.transform.matrix ?? Matrix4.identity
+        const view = camera.parent?.transform.matrix.inverse() ?? Matrix4.identity
 
         const meshes = scene.query("mesh-renderer")
 

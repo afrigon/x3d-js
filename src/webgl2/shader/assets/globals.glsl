@@ -7,6 +7,6 @@ struct Globals {
     mat4 model;
     mat4 vp;
     mat4 mvp;
-}
+};
 
 uniform Globals globals;

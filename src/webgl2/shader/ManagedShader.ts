@@ -24,11 +24,26 @@ export class ManagedShader extends RawShader {
         uniforms = {},
         globals = true
     }: ManagedShaderProps) {
+        function typeOf(uniform: Uniform): string {
+            if (uniform.type == "array") {
+                return typeOf(uniform.of)
+            }
+
+            if (uniform.type == "struct") {
+                return uniform.name
+            }
+
+            return uniform.type
+        }
+
+        function suffix(uniform: Uniform): string {
+            return uniform.type == "array" ? `[${uniform.size}]${suffix(uniform.of)}` : ""
+        }
+
         const structs = structures.map(s => (`
 struct ${s.name} {
-${
-    Object.entries(s.fields).map(([name, type]) => (
-        `${this.typeOf(type)} ${name}${this.suffix(type)};`
+${Object.entries(s.fields).map(([name, type]) => (
+        `${typeOf(type)} ${name}${suffix(type)};`
     ))
     .join("\n")
 }
@@ -37,7 +52,7 @@ ${
         )).join("\n\n")
 
         const _uniforms = Object.entries(uniforms).map(([name, type]) => (
-            `uniform ${this.typeOf(type)} ${name}${this.suffix(type)};`
+            `uniform ${typeOf(type)} ${name}${suffix(type)};`
         )).join("\n")
 
         super({
@@ -67,21 +82,5 @@ ${_uniforms}
 ${fragment}
             `
         })
-    }
-
-    private typeOf(uniform: Uniform): string {
-        if (uniform.type == "array") {
-            return this.typeOf(uniform.of)
-        }
-
-        if (uniform.type == "struct") {
-            return uniform.name
-        }
-
-        return uniform.type
-    }
-
-    private suffix(uniform: Uniform): string {
-        return uniform.type == "array" ? `[${uniform.size}]${this.suffix(uniform.of)}` : ""
     }
 }

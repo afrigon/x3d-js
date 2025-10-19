@@ -40,16 +40,13 @@ export class ManagedShader extends RawShader {
             return uniform.type == "array" ? `[${uniform.size}]${suffix(uniform.of)}` : ""
         }
 
-        const structs = structures.map(s => (`
-struct ${s.name} {
-${Object.entries(s.fields).map(([name, type]) => (
-        `${typeOf(type)} ${name}${suffix(type)};`
-    ))
-    .join("\n")
-}
-}
-`
-        )).join("\n\n")
+        const structs = structures.map(s => {
+            const fields = Object.entries(s.fields).map(([name, type]) => (
+                `\t${typeOf(type)} ${name}${suffix(type)};`
+            )).join("\n")
+
+            return `struct ${s.name} {\n${fields}\n};`
+        }).join("\n\n")
 
         const _uniforms = Object.entries(uniforms).map(([name, type]) => (
             `uniform ${typeOf(type)} ${name}${suffix(type)};`

@@ -38,11 +38,11 @@ export class FPSController extends GameComponent {
 
         const direction = Vector3.zero
 
-        if (input.isHeld("W")) { direction.z += 1 }
-        if (input.isHeld("A")) { direction.x -= 1 }
-        if (input.isHeld("D")) { direction.x += 1 }
-        if (input.isHeld("S")) { direction.z -= 1 }
-        if (input.isHeld("Space")) { direction.y += 1 }
+        if (input.isHeld("w")) { direction.z += 1 }
+        if (input.isHeld("a")) { direction.x -= 1 }
+        if (input.isHeld("d")) { direction.x += 1 }
+        if (input.isHeld("s")) { direction.z -= 1 }
+        if (input.isHeld(" ")) { direction.y += 1 }
         if (input.isHeld("Shift")) { direction.y -= 1 }
 
         const rotation = this.parent?.transform.rotation ?? Quaternion.identity

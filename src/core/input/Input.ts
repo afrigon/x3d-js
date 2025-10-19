@@ -5,6 +5,7 @@ export class Input {
     pressed: Set<string> = new Set()
     released: Set<string> = new Set()
 
+    cursorPosition: Vector2 = Vector2.zero
     cursorDelta: Vector2 = Vector2.zero
     scrollDelta: Vector2 = Vector2.zero
 

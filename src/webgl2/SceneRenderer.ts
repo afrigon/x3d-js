@@ -159,4 +159,8 @@ export class SceneRenderer implements Deletable {
 
         return shader.id
     }
+
+    deleteGeometry() {
+        this.registries.geometries.delete()
+    }
 }

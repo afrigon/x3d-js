@@ -41,6 +41,9 @@ export class SceneRenderer implements Deletable {
         }
 
         this.gl = gl
+    }
+
+    init() {
         this.gl.enable(this.gl.DEPTH_TEST)
         this.gl.viewport(0, 0, this._width, this._height)
     }

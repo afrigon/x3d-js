@@ -45,6 +45,9 @@ export class SceneRenderer implements Deletable {
 
     init() {
         this.gl.enable(this.gl.DEPTH_TEST)
+
+        this.canvas.width = this._width
+        this.canvas.height = this._height
         this.gl.viewport(0, 0, this._width, this._height)
     }
 

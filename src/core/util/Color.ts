@@ -35,6 +35,44 @@ export class Color {
         return new Color(r, g ?? r, b ?? r, a ?? 1)
     }
 
+    static string(s: string): Color {
+        if (!s.startsWith("#")) {
+            return Color.white
+        }
+
+        const h = s.slice(1)
+
+        if (h.length === 3 || h.length === 4) {
+            const r = parseInt(h[0] + h[0], 16)
+            const g = parseInt(h[1] + h[1], 16)
+            const b = parseInt(h[2] + h[2], 16)
+
+            if (h.length === 4) {
+                const a = parseInt(h[3] + h[3], 16)
+
+                return new Color(r, g, b, a)
+            }
+
+            return new Color(r, g, b)
+        }
+
+        if (h.length === 6 || h.length === 8) {
+            const r = parseInt(h.slice(0, 2), 16)
+            const g = parseInt(h.slice(2, 4), 16)
+            const b = parseInt(h.slice(4, 6), 16)
+
+            if (h.length === 8) {
+                const a = parseInt(h.slice(6, 8), 16)
+
+                return new Color(r, g, b, a)
+            }
+
+            return new Color(r, g, b)
+        }
+
+        return Color.white
+    }
+
     static get white(): Color {
         return new Color(255, 255, 255)
     }
